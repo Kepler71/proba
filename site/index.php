@@ -1,10 +1,12 @@
 <?php
+require __DIR__.'/controllers/NewsController.php';
 
-phpinfo();
-/**
- * Created by PhpStorm.
- * User: ПушкаревЯ
- * Date: 02.03.15
- * Time: 11:50
- */
+$ctrl = isset($_GET['ctrl']) ? $_GET['ctrl']: 'News';
+$act = isset($_GET['act']) ? $_GET['ctrl'] : 'All';
+
+$controllerClassName = $ctrl . 'Controller';
+require_once __DIR__ . '/controllers/' . $controllerClassName . '.php';
+$controller = new $controllerClassName;
+$method = 'action' . $act;
+$controller->$method();
 ?>
