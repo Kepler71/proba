@@ -6,21 +6,39 @@
  * Time: 13:33
  */
 
-class View {
+class View
+{
 
     protected $data = [];
 
-    public function assign($name, $value){
+    public function __set($k , $v)
+    {
+        $this->data[$k] = $v;
+    }
 
-    $this->data[$name] = $value;
-}
+    public function __get($k)
+    {
 
+    return $this->data[$k];
 
-    public function display($template){
+    }
 
-        foreach ($this->data as $key => $val){
+    public function render ($template){
+
+        foreach ($this->data as $key => $val)
+        {
             $$key = $val;
         }
+        ob_start();
         include_once __DIR__ . '/../views/'. $template;
+        $contents = ob_get_contents();
+        ob_end_clean();
+        return $contents;
     }
+
+    public function display($template){
+        echo $this->render($template);
+    }
+
+
 }
