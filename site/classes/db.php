@@ -1,21 +1,32 @@
 <?php
 
-class db {
-public function __construct(){
-   mysql_connect('localhost', 'root', '');
-   mysql_select_db('test');
-}
-   public function queryAll($sql, $class = 'stdClass')
+class DB {
+
+    private $dbh;
+    private $className = 'stdClass';
+    public function __construct()
+
     {
-        $result = mysql_query($sql);
-        $data = [];
-        while (false !== ($row = mysql_fetch_object($result, $class))) {
-            $data[] = $row;
-        }
-        return $data;
+
+        $this->dbh = new PDO('mysql:dbname=test;host=localhost','root','');
+    }
+    public function query ($sql,$paramtrs=[] )
+    {
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute($paramtrs);
+        return $sth->fetchAll(PDO::FETCH_CLASS, $this->className);
+
     }
 
- public function queryOne($sql, $class = 'stdClass'){
-    return $this->queryAll($sql, $class)[0];
-}
+    public function setClassName($className)
+    {
+        $this->className = $className;
+    }
+    public function execut ($sql,$paramtrs=[] )
+    {
+        $sth = $this->dbh->prepare($sql);
+        return  $sth->execute($paramtrs);
+    }
+
+
 } 
