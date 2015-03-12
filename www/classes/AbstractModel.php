@@ -1,5 +1,7 @@
 <?php
-
+namespace Application\Classes;
+use Application\Classes\IModel;
+use Application\Classes\DB;
 
 abstract class AbstractModel
 {
@@ -108,7 +110,7 @@ abstract class AbstractModel
     public function kill()
     {
         $db = new DB();
-        $sql = 'DELETE FROM ' . static::$table . ' WHERE id=:id';
+        $sql = 'DELETE FROM ' . static::$ntable . ' WHERE id=:id';
         return  $db->execute($sql, [':id'=>$this->id]);
     }
 

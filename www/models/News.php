@@ -6,6 +6,10 @@
  * Time: 15:31
  */
 
+
+
+namespace Application\Models;
+use Application\Classes\AbstractModel;
 /**
  * Class NewsModel
  *  @property $id;
@@ -13,9 +17,9 @@
  * @property $text;
  */
 
-class NewsModel
+class News
 extends AbstractModel
 {
 protected static $ntable = 'news';
-protected static $likeUserTable = 'like';
+
 }

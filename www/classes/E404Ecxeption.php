@@ -5,7 +5,7 @@
  * Date: 11.03.15
  * Time: 10:50
  */
-
+namespace Application\Classes;
 class E404Ecxeption
 extends Exception
 {
@@ -18,11 +18,12 @@ extends Exception
     $a['fileError'] = $e->getFile();
     $e->recordLogError($a);
        return $a;
+
    }
 
    public function recordLogError($a)
      {
-       $current = file_get_contents(__DIR__ . '/../log');
+       $current = file_get_contents(__DIR__ . '/../erorr.log');
        foreach ($a as $value)
        {
         $current .= "$value\n";

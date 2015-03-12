@@ -5,7 +5,7 @@
  * Date: 09.03.2015
  * Time: 13:33
  */
-
+namespace Application\Classes;
 class View
 {
 
